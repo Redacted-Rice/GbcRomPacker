@@ -26,6 +26,18 @@ public class Blocks {
         blankedBlocks = new LinkedList<>();
     }
 
+    /**
+     * Copies blanked address ranges only. Allocated fixed/hybrid/movable blocks are rebuilt at
+     * write time and are not carried over.
+     */
+    public Blocks copy() {
+        Blocks copy = new Blocks();
+        for (AddressRange range : blankedBlocks) {
+            copy.addBlankedBlock(new AddressRange(range));
+        }
+        return copy;
+    }
+
     public void addFixedBlock(FixedBlock block) {
         addIdsOfBlock(block);
         fixedBlocks.add(block);
