@@ -177,7 +177,7 @@ public class AllocatableBank {
                 assignedAddresses, allocsThatDontFit);
     }
 
-    // TODO later: Probably can optimize packing into bank space some (i.e. leave most space, leave
+    // TODO: Probably can optimize packing into bank space some (i.e. leave most space, leave
     // smallest space)
     private boolean checkForAndRemoveExcessAllocsInCollection(Iterator<MovableBlock> allocItr,
             AssignedAddresses assignedAddresses, List<MovableBlock> allocsThatDontFit) {

@@ -14,7 +14,7 @@ import redactedrice.gbcframework.addressing.BankAddress;
 import redactedrice.gbcframework.utils.RomUtils;
 
 public class DataManager {
-    // TODO later: Add a config file/interface for blocks to consider not free as well
+    // TODO: Add a config file/interface for blocks to consider not free as well?
 
     // BankId, bank object
     private SortedMap<Byte, AllocatableBank> freeSpace;
@@ -167,8 +167,9 @@ public class DataManager {
         // For each bank, pack and remove any excess
         List<MovableBlock> bankAllocsThatDontFit = new LinkedList<>();
         for (AllocatableBank bank : freeSpace.values()) {
-            foundAllocThatDoesntFit = bank.checkForAndRemoveExcessAllocs(bankAllocsThatDontFit,
-                    assignedAddresses) || foundAllocThatDoesntFit;
+            foundAllocThatDoesntFit =
+                    bank.checkForAndRemoveExcessAllocs(bankAllocsThatDontFit, assignedAddresses)
+                            || foundAllocThatDoesntFit;
             allocsThatDontFit.addAll(bankAllocsThatDontFit);
         }
 
@@ -221,8 +222,7 @@ public class DataManager {
         while (address <= bankBounds[1]) {
             if (rawBytes[address] == (byte) 0xFF) {
                 int spaceStart = address;
-                while (++address < bankBounds[1] && rawBytes[address] == (byte) 0xFF)
-                    ;
+                while (++address < bankBounds[1] && rawBytes[address] == (byte) 0xFF);
 
                 // If we found space, then save it to the map
                 // We only save spaces that are at least x long to prevent finding locations that
